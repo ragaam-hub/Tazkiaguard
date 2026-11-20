@@ -203,6 +203,13 @@ class MainActivity : Activity() {
                 requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
             }
         }
+        row(Emergency.hasUsageAccess(this), "Akses penggunaan (wajib, untuk tombol darurat)") {
+            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        }
+        val phoneOk = checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+        row(phoneOk, "Status panggilan (untuk tombol darurat)") {
+            requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), 2)
+        }
         val pm = getSystemService(PowerManager::class.java)
         row(pm.isIgnoringBatteryOptimizations(packageName), "Bebas optimasi baterai") {
             try {

@@ -76,6 +76,13 @@ object Prefs {
     fun testLock(c: Context) = sp(c).getBoolean("test_lock", false)
     fun setTestLock(c: Context, v: Boolean) = sp(c).edit().putBoolean("test_lock", v).commit()
 
+    // ---------- Mode darurat ----------
+    fun emergencyStart(c: Context) = sp(c).getLong("em_start", 0L)
+    fun setEmergencyStart(c: Context, t: Long) = sp(c).edit().putLong("em_start", t).commit()
+    fun emergencyCall(c: Context) = sp(c).getBoolean("em_call", false)
+    fun setEmergencyCall(c: Context, v: Boolean) = sp(c).edit().putBoolean("em_call", v).commit()
+    fun endEmergency(c: Context) = sp(c).edit().putLong("em_start", 0L).putBoolean("em_call", false).commit()
+
     // ---------- Log ----------
     fun log(c: Context, msg: String) {
         val time = SimpleDateFormat("dd/MM HH:mm", Locale("id", "ID")).format(Date())

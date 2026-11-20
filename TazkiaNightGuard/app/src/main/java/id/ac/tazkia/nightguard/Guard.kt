@@ -20,6 +20,7 @@ object Guard {
     fun isNightTime(c: Context) = inWindow(minutesNow(), Prefs.startMin(c), Prefs.endMin(c))
 
     fun shouldLock(c: Context): Boolean {
+        if (Emergency.allowsOpen(c)) return false
         if (Prefs.testLock(c)) return true
         if (!Prefs.enabled(c)) return false
         return isNightTime(c) && System.currentTimeMillis() >= Prefs.passUntil(c)

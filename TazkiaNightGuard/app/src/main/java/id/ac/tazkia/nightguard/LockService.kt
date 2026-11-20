@@ -22,7 +22,7 @@ class LockService : Service() {
     private val tick = object : Runnable {
         override fun run() {
             evaluate()
-            handler.postDelayed(this, 2000)
+            handler.postDelayed(this, 1000)
         }
     }
 

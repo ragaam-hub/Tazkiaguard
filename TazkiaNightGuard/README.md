@@ -8,7 +8,7 @@ supaya mahasiswa tidak begadang. Layar kunci hanya bisa dibuka dengan **PIN daru
 - Jadwal bisa diubah (default 00:00–05:00, mendukung jadwal lewat tengah malam seperti 23:00–05:00).
 - **PIN darurat** (minimal 6 angka): membuka HP selama N menit (default 30), lalu terkunci lagi kalau masih jam malam.
 - PIN disimpan sebagai hash SHA-256 + salt, bukan teks asli. Salah 5x → diblokir 60 detik.
-- Tombol **Panggilan Darurat 112** selalu tersedia (membuka dialer selama 3 menit, tercatat di riwayat).
+- Tombol **Panggilan Darurat 112** selalu tersedia. Layar hanya terbuka selama berada di aplikasi telepon atau sedang menelepon; begitu keluar / panggilan selesai, HP langsung terkunci lagi.
 - Panel admin dilindungi PIN: jadwal, durasi buka, ganti PIN, aktif/nonaktif, riwayat.
 - Tetap jalan setelah HP restart (boot receiver) + watchdog setiap ±10 menit.
 - Admin perangkat (opsional) agar aplikasi tidak bisa langsung di-uninstall.
@@ -24,6 +24,7 @@ supaya mahasiswa tidak begadang. Layar kunci hanya bisa dibuka dengan **PIN daru
 2. Buat PIN darurat (sebaiknya dipegang wali/pengurus, bukan pemilik HP).
 3. Di panel admin, berikan izin:
    - **Tampil di atas aplikasi lain** (wajib)
+   - **Akses penggunaan** dan **Status panggilan** (agar tombol darurat tidak bisa dipakai untuk membobol)
    - Notifikasi, **Bebas optimasi baterai**, **Admin perangkat**
    - Xiaomi/Redmi/POCO: **Autostart** dan **Izin lainnya → Tampilkan jendela pop-up saat berjalan di latar belakang**
 4. Tekan **Uji layar kunci sekarang** untuk mencoba, keluar dengan PIN.

@@ -129,6 +129,8 @@ class LockOverlay(private val ctx: Context, private val onDismiss: () -> Unit) {
         col.addView(info, Ui.topMargin(c, 6))
         col.addView(Ui.button(c, "Buka dengan PIN darurat") { tryUnlock() }, Ui.topMargin(c, 8))
         col.addView(Ui.button(c, "📞  Panggilan Darurat 112", danger = true) { emergency() }, Ui.topMargin(c, 12))
+        col.addView(Ui.text(c, "Hanya untuk menelepon. HP terkunci lagi saat keluar dari aplikasi telepon.",
+            12f, Ui.MUTED, center = true), Ui.topMargin(c, 6))
 
         col.addView(Ui.text(c, "Program Jam Malam Mahasiswa STMIK Tazkia", 12f, Ui.MUTED, center = true),
             Ui.topMargin(c, 32))
@@ -184,10 +186,8 @@ class LockOverlay(private val ctx: Context, private val onDismiss: () -> Unit) {
     }
 
     private fun emergency() {
-        if (Prefs.testLock(ctx)) Prefs.setTestLock(ctx, false)
-        val until = System.currentTimeMillis() + 3 * 60_000L
-        if (Prefs.passUntil(ctx) < until) Prefs.setPassUntil(ctx, until)
-        Prefs.log(ctx, "Tombol panggilan darurat dipakai (layar dibuka 3 menit)")
+        // Tidak lagi memberi waktu bebas: layar hanya terbuka selama di aplikasi telepon / menelepon.
+        Emergency.start(ctx)
         onDismiss()
         try {
             ctx.startActivity(
